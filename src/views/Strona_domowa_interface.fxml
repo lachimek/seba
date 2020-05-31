@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <children>
+    <AnchorPane minHeight="0.0" minWidth="0.0" fx:id="root" prefHeight="419.0" prefWidth="643.0" style="-fx-background-color: #009dff;">
+         <children>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="112.0" prefHeight="196.0" prefWidth="262.0" style="-fx-font-family: Monoton;" styleClass="font401" stylesheets="@style.css" text="401" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Label>
+            <Label layoutX="322.0" layoutY="56.0" prefHeight="112.0" prefWidth="320.0" text="System katalogowanie zleceń w serwisie informatycznym." textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Button layoutX="406.0" layoutY="187.0" mnemonicParsing="false" onAction="#zaloguj" prefHeight="61.0" prefWidth="153.0" style="-fx-background-color: #009dff;" text="Zaloguj" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="406.0" layoutY="248.0" mnemonicParsing="false" onAction="#zarejestruj" prefHeight="61.0" prefWidth="153.0" style="-fx-background-color: #009dff;" text="Zarejestruj" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="102.0" layoutY="375.0" prefHeight="30.0" prefWidth="175.0" text="Zborowski Sebastian" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_WORD_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
