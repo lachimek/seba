@@ -1,29 +1,45 @@
 package controllers;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import main.App;
+import main.Main;
+import views.Views;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MenuController {
+public class MenuController implements Initializable {
     public AnchorPane root;
+    public Label loggedInLbl;
+
+    private App app = App.getInstance();
+
 
     public void archiwum() {
+        app.archiwum = 1;
+        Main.setView(Views.ZLECENIA);
+    }
+
+    public void aktywneZlecenia() {
+        app.archiwum = 0;
+        Main.setView(Views.ZLECENIA);
     }
 
     public void zarzadzaj() {
     }
 
-    public void aktywneZlecenia() {
-    }
-
     public void dodajZlecenie() {
     }
 
-    public void wyloguj() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/Strona_domowa_interface.fxml")));
-        root.getChildren().setAll(anchorPane);
+    public void wyloguj() {
+        Main.setView(Views.HOME);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loggedInLbl.setText("Witaj "+ app.loggedInUser +"!");
     }
 }

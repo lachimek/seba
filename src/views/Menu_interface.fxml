@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController" fx:id="root">
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
    <children>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="643.0" style="-fx-background-color: #009dff;">
          <children>
@@ -34,6 +34,11 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>
+            <Label fx:id="loggedInLbl" layoutX="14.0" layoutY="370.0" prefHeight="35.0" prefWidth="245.0" text="Witaj ">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

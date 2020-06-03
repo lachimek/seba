@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="498.0" prefWidth="600.0" style="-fx-background-color: #009dff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popups.ZleceniaSzczegolyPopup">
+   <children>
+       <Label layoutX="126.0" layoutY="79.0" text="Pracownik" textFill="WHITE">
+           <font>
+               <Font name="System Bold" size="16.0" />
+           </font>
+       </Label>
+       <TextField fx:id="pracownik" editable="false" layoutX="320.0" layoutY="79.0" />
+      <Label layoutX="126.0" layoutY="114.0" text="Klient" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="klient" editable="false" layoutX="320.0" layoutY="115.0" />
+      <ComboBox fx:id="telCombo" layoutX="320.0" layoutY="155.0" prefWidth="150.0" />
+      <Label layoutX="126.0" layoutY="154.0" text="Nr tel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="199.0" layoutY="21.0" prefHeight="30.0" prefWidth="205.0" text="Szczegóły zlecenia" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="emailCombo" layoutX="320.0" layoutY="197.0" prefWidth="150.0" />
+      <Label layoutX="126.0" layoutY="196.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+       <TextArea fx:id="adresKlienta" editable="false" layoutX="320.0" layoutY="235.0" prefHeight="73.0" prefWidth="237.0" wrapText="true" />
+       <Label layoutX="126.0" layoutY="259.0" text="Adres klienta" textFill="WHITE">
+           <font>
+               <Font name="System Bold" size="16.0" />
+           </font>
+       </Label>
+      <Label layoutX="126.0" layoutY="318.0" prefHeight="25.0" prefWidth="169.0" text="Koszt przewidywany" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="KosztPrzew" editable="false" layoutX="320.0" layoutY="318.0" />
+      <Label layoutX="126.0" layoutY="357.0" text="Koszt końcowy" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="kosztKonc" editable="false" layoutX="320.0" layoutY="357.0" />
+      <TextArea fx:id="opis" editable="false" layoutX="320.0" layoutY="392.0" prefHeight="73.0" prefWidth="237.0" wrapText="true" />
+      <Label layoutX="126.0" layoutY="416.0" text="Opis" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

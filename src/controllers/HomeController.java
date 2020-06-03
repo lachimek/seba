@@ -1,22 +1,21 @@
 package controllers;
 
-
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import main.Main;
+import views.Views;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class HomeController {
     public AnchorPane root;
 
+    //metoda przycisku ktory zmienia okno na okno logowania
     public void zaloguj() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/Logowanie_interface.fxml")));
-        root.getChildren().setAll(anchorPane);
+        Main.setView(Views.LOGIN);
     }
 
+    //metoda przycisku ktory zmienia okno na okno rejestracji
     public void zarejestruj() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/Rejestracja_interface.fxml")));
-        root.getChildren().setAll(anchorPane);
+        Main.setView(Views.REJESTRACJA);
     }
 }
