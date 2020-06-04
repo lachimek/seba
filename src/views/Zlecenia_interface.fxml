@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #009dff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ArchiwumController">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #009dff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ZleceniaController">
    <children>
       <TableView fx:id="table" layoutX="41.0" layoutY="94.0" prefHeight="288.0" prefWidth="718.0">
         <columns>
@@ -19,12 +18,15 @@
             <TableColumn fx:id="opis" prefWidth="329.0" text="Opis" />
         </columns>
       </TableView>
-      <Label layoutX="328.0" layoutY="28.0" fx:id="label" text="placeholder" textFill="WHITE">
+      <Label fx:id="label" layoutX="328.0" layoutY="28.0" text="placeholder" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <Button layoutX="625.0" layoutY="519.0" mnemonicParsing="false" onAction="#powrotDoMenu" prefHeight="55.0" prefWidth="134.0" text="Powrót do menu" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="41.0" layoutY="519.0" mnemonicParsing="false" onAction="#pokazSzczegoly" prefHeight="55.0" prefWidth="134.0" text="Pokaż szczegóły" />
+      <Button fx:id="deleteBtn" layoutX="194.0" layoutY="398.0" mnemonicParsing="false" onAction="#usunZlecenie" prefHeight="55.0" prefWidth="134.0" text="Usuń zlecenie" />
+      <Button fx:id="updateBtn" layoutX="333.0" layoutY="398.0" mnemonicParsing="false" onAction="#modyfikujOpis" prefHeight="55.0" prefWidth="134.0" text="Zmień opis" />
+      <Button fx:id="endBtn" layoutX="473.0" layoutY="398.0" mnemonicParsing="false" onAction="#zakonczZlecenie" prefHeight="55.0" prefWidth="134.0" text="Zakończ zlecenie" />
    </children>
 </AnchorPane>

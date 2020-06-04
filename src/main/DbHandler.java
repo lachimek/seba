@@ -231,4 +231,50 @@ public class DbHandler {
         System.out.println("Pid: "+Pid);
         return Pid;
     }
+
+    public boolean usunZlecenie(int id){
+        String q = "DELETE FROM `zlecenie` WHERE `id` = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            stmt.close();
+            return rs.first();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean zakonczZlecenie(int kosztKoncowy, int id){
+        String q = "UPDATE `zlecenie` SET Status = 2, data_zak = now(), Koszt_koncowy = ? WHERE `id` = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setInt(1, kosztKoncowy);
+            stmt.setInt(2, id);
+            stmt.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void modyfikujOpis(String opis, int id){
+        String q = "UPDATE `zlecenie` SET `Opis` = ? WHERE `id` = ?";
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setString(1, opis);
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

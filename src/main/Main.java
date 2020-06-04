@@ -34,6 +34,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
     //metoda tworzaca popup
     public static void createPopup(String fxml){
         Stage stage = new Stage();
