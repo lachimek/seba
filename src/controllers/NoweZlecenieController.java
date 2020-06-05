@@ -3,21 +3,12 @@ package controllers;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import main.App;
-import main.DbHandler;
-import main.Klient;
-import main.Main;
+import javafx.scene.control.*;
+import main.*;
 import views.Views;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class NoweZlecenieController implements Initializable {
     public ComboBox<String> klienciCombo;
@@ -31,7 +22,6 @@ public class NoweZlecenieController implements Initializable {
     private HashMap<Integer, String> hmapPracownicy;
     private List<String> klienci = new ArrayList<>();
     private List<String> pracownicy = new ArrayList<>();
-    private Klient k;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,15 +43,42 @@ public class NoweZlecenieController implements Initializable {
     }
 
     public void dodajZlecenie() {
-
+        int idKlienta = getKey(hmapKlienci, klienciCombo.getSelectionModel().getSelectedItem());
+        int idPracownika = getKey(hmapPracownicy, pracownicyCombo.getSelectionModel().getSelectedItem());
+        Zlecenie z = new Zlecenie(0, idKlienta, "", null, null, kosztPrzewidywany.getText(), null, opisZlecenia.getText(), false);
+        if(db.dodajZlecenie(z, idPracownika)){
+            Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+            alertInfo.setTitle("Sukces");
+            alertInfo.setHeaderText(null);
+            alertInfo.setContentText("Zlecenie dodane");
+            alertInfo.showAndWait();
+            App.getInstance().archiwum = 0;
+            Main.setView(Views.ZLECENIA);
+        }else {
+            Alert alertErr = new Alert(Alert.AlertType.ERROR);
+            alertErr.setTitle("Błąd");
+            alertErr.setHeaderText(null);
+            alertErr.setContentText("Wystąpił nieoczekiwany błąd");
+            alertErr.showAndWait();
+        }
     }
 
     private void setKlienciCombo(){
+        klienci.clear();
         hmapKlienci = db.getKlienciIdMap();
         for(int key: hmapKlienci.keySet()){
             klienci.add(hmapKlienci.get(key));
         }
         klienciCombo.setItems(FXCollections.observableArrayList(klienci));
+    }
+
+    private <K, V> K getKey(Map<K, V> map, V value) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
     //nowe zlecenie klient brany z globala
     //wypelnienie comboboxa klientami (imie nazwisko)

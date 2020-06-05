@@ -241,6 +241,46 @@ public class DbHandler {
         }
     }
 
+    public boolean dodajZlecenie(Zlecenie z, int pracownikId){
+        String q = "INSERT INTO `zlecenie`(`klient_id`, `data_roz`, `data_zak`, `Koszt_przewidywany`, `Koszt_koncowy`, `Opis`, `Status`) VALUES (?,now(),NULL,?,NULL,?,1)";
+        String qPara = "INSERT INTO `zlec_prac`(`Zlecenie_id`, `pracownik_id`) VALUES (?,?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setInt(1, z.klientId.get());
+            stmt.setString(2, z.kosztPrzewidywany.get());
+            stmt.setString(3, z.opis.get());
+            stmt.execute();
+            stmt.close();
+
+            stmt = conn.prepareStatement(qPara);
+            stmt.setInt(1, getOstatnieIdZlecenie());
+            stmt.setInt(2, pracownikId);
+            stmt.execute();
+            stmt.close();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private int getOstatnieIdZlecenie(){
+        String q = "SELECT id FROM `zlecenie` ORDER BY id DESC LIMIT 1";
+        Statement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(q);
+            rs.first();
+            return rs.getInt("id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public Pracownik getPracownikById(int id){
         String q = "SELECT * FROM pracownik WHERE id = ?";
         PreparedStatement stmt;
