@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="451.0" prefWidth="600.0" style="-fx-background-color: #009dff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popups.NowyKlientController">
+        <Label alignment="CENTER" layoutX="184.0" layoutY="21.0" prefHeight="30.0" prefWidth="205.0" text="Nowy klient" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="111.0" layoutY="62.0" text="Imie" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
+   <Label layoutX="111.0" layoutY="96.0" text="Nazwisko" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <TextField fx:id="imie" layoutX="220.0" layoutY="62.0" />
+   <TextField fx:id="nazwisko" layoutX="220.0" layoutY="96.0" />
+   <TextArea fx:id="telefony" editable="false" layoutX="220.0" layoutY="134.0" prefHeight="61.0" prefWidth="205.0" />
+   <Label layoutX="111.0" layoutY="152.0" text="Nr telefonu" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <TextArea fx:id="emaile" editable="false" layoutX="220.0" layoutY="200.0" prefHeight="61.0" prefWidth="205.0" />
+   <Label layoutX="111.0" layoutY="218.0" text="Email" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <TextArea fx:id="adresy" editable="false" layoutX="220.0" layoutY="268.0" prefHeight="61.0" prefWidth="205.0" />
+   <Label alignment="TOP_LEFT" layoutX="109.0" layoutY="268.0" prefHeight="61.0" prefWidth="101.0" text="Adres zamieszkania" textFill="WHITE" wrapText="true">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+    <Button layoutX="443.0" layoutY="152.0" mnemonicParsing="false" onAction="#dodajNrTel" text="Dodaj" />
+    <Button layoutX="443.0" layoutY="218.0" mnemonicParsing="false" onAction="#dodajEmail" text="Dodaj" />
+    <Button layoutX="443.0" layoutY="286.0" mnemonicParsing="false" onAction="#dodajAdres" text="Dodaj" />
+    <Button layoutX="500.0" layoutY="152.0" mnemonicParsing="false" onAction="#cofnijNrTel" text="Cofnij" />
+    <Button layoutX="500.0" layoutY="218.0" mnemonicParsing="false" onAction="#cofnijEmail" text="Cofnij" />
+    <Button layoutX="500.0" layoutY="286.0" mnemonicParsing="false" onAction="#cofnijAdres" text="Cofnij" />
+    <Button layoutX="225.0" layoutY="364.0" mnemonicParsing="false" fx:id="btn" onAction="#utworzKlienta" prefHeight="47.0" prefWidth="121.0" text="Utwórz klienta" />
+</AnchorPane>

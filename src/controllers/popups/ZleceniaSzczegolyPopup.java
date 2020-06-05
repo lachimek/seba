@@ -20,27 +20,19 @@ public class ZleceniaSzczegolyPopup implements Initializable {
     public TextField kosztKonc;
     public TextArea opis;
 
-    private Klient k;
-    private Pracownik p;
-    private Zlecenie z;
-    private DbHandler db;
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        db = App.getInstance().getDbHandler();
-        k = db.getKlientById(App.getInstance().wybraneZlecenieKlientId);
-        p = db.getPracownikById(db.getPracownikIdByZlecenieId(App.getInstance().wybraneZlecenieId));
-        z = db.getZlecenieById(App.getInstance().wybraneZlecenieId);
+        DbHandler db = App.getInstance().getDbHandler();
+        Klient k = db.getKlientById(App.getInstance().wybraneZlecenieKlientId);
+        Pracownik p = db.getPracownikById(db.getPracownikIdByZlecenieId(App.getInstance().wybraneZlecenieId));
+        Zlecenie z = db.getZlecenieById(App.getInstance().wybraneZlecenieId);
 
-        pracownik.setText(p.getImie()+" "+p.getNazwisko());
-        klient.setText(k.getImie()+" "+k.getNazwisko());
+        pracownik.setText(p.getImie()+" "+ p.getNazwisko());
+        klient.setText(k.getImie()+" "+ k.getNazwisko());
         telCombo.getItems().setAll(k.getTelefony());
         emailCombo.getItems().setAll(k.getEmaile());
-        k.getAdresy().forEach(adres -> {
-            adresKlienta.appendText(adres.toString());
-        });
+        k.getAdresy().forEach(adres -> adresKlienta.appendText(adres.toString()+'\n'));
         KosztPrzew.setText(z.kosztPrzewidywanyProperty().get());
         kosztKonc.setText(z.kosztKoncowyProperty().get());
         opis.setText(z.opisProperty().get());

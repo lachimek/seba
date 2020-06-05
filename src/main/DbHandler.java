@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -29,7 +30,7 @@ public class DbHandler {
     //metoda logowania zwraca true/false
     public boolean loginUser(String login, String pass){
         String q = "SELECT * FROM pracownik WHERE BINARY login = ? AND haslo = SHA1(?)";
-        PreparedStatement statement = null;
+        PreparedStatement statement;
         try{
             statement = conn.prepareStatement(q);
             statement.setString(1, login);
@@ -49,7 +50,7 @@ public class DbHandler {
     //metoda od rejestracji zwraca true/false
     public boolean registerUser(String login, String pass, String imie, String nazwisko, String telefon, String email){
         String q = "INSERT INTO `pracownik`(`id`, `Imie`, `Nazwisko`, `nr_tel`, `email`, `login`, `haslo`, `serwis_id`) VALUES (DEFAULT,?,?,?,?,?,SHA(?),1)";
-        PreparedStatement statement = null;
+        PreparedStatement statement;
         try{
             statement = conn.prepareStatement(q);
             statement.setString(1, imie);
@@ -93,8 +94,8 @@ public class DbHandler {
 
     public ObservableList<Zlecenie> getZlecenia(){
         String q = "SELECT zlecenie.id, klient_id, klient.Imie AS Imie, klient.Nazwisko AS Nazwisko, data_roz, data_zak, Koszt_przewidywany, Koszt_koncowy, Opis, Status FROM zlecenie JOIN klient ON zlecenie.klient_id = klient.id WHERE Status=?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
+        ResultSet rs;
         ObservableList<Zlecenie> zlecenia = FXCollections.observableArrayList();
         try {
             stmt = conn.prepareStatement(q);
@@ -110,8 +111,8 @@ public class DbHandler {
 
     public Zlecenie getZlecenieById(int id){
         String q = "SELECT zlecenie.id, klient_id, klient.Imie AS Imie, klient.Nazwisko AS Nazwisko, data_roz, data_zak, Koszt_przewidywany, Koszt_koncowy, Opis, Status FROM zlecenie JOIN klient ON zlecenie.klient_id = klient.id WHERE Status=? AND zlecenie.id = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
+        ResultSet rs;
         Zlecenie z = null;
         try {
             stmt = conn.prepareStatement(q);
@@ -149,8 +150,8 @@ public class DbHandler {
         List<Adres> adresy = new ArrayList<>();
         String imie = "";
         String nazwisko = "";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
+        ResultSet rs;
         try {
             stmt = conn.prepareStatement(qEmaile);
             stmt.setInt(1, id);
@@ -191,10 +192,59 @@ public class DbHandler {
         return new Klient(id, imie, nazwisko, telefony, emaile, adresy);
     }
 
+    public void dodajKlienta(Klient k){
+        int insertId = getOstatnieIdKlienta()+1;
+        String qKlient = "INSERT INTO `klient`(`id`, `Imie`, `Nazwisko`) VALUES (?,?,?)";
+        String qEmail = "INSERT INTO `email`(`email`, `uzytkownik_id`) VALUES (?,?)";
+        String qAdres = "INSERT INTO `adres`(`Miasto`, `Kod_pocztowy`, `Ulica`, `Numer_budynku`, `Numer_lokalu`, `uzytkownik_id`) VALUES (?,?,?,?,?,?)";
+        String qTel = "INSERT INTO `numer_telefonu`(`nr_tel`, `uzytkownik_id`) VALUES (?,?)";
+
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(qKlient);
+            stmt.setInt(1, insertId);
+            stmt.setString(2, k.getImie());
+            stmt.setString(3, k.getNazwisko());
+            stmt.execute();
+            stmt.close();
+
+            for(String email: k.getEmaile()){
+                stmt = conn.prepareStatement(qEmail);
+                stmt.setString(1, email);
+                stmt.setInt(2, insertId);
+                stmt.execute();
+                stmt.close();
+            }
+
+            for(Adres adres: k.getAdresy()){
+                stmt = conn.prepareStatement(qAdres);
+                stmt.setString(1, adres.miasto);
+                stmt.setString(2, adres.kodPocztowy);
+                stmt.setString(3, adres.ulica);
+                stmt.setString(4, adres.nrBudynku);
+                stmt.setString(5, adres.nrLokalu);
+                stmt.setInt(6, insertId);
+                stmt.execute();
+                stmt.close();
+            }
+
+            for(String tel: k.getTelefony()){
+                stmt = conn.prepareStatement(qTel);
+                stmt.setString(1, tel);
+                stmt.setInt(2, insertId);
+                stmt.execute();
+                stmt.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Pracownik getPracownikById(int id){
         String q = "SELECT * FROM pracownik WHERE id = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
+        ResultSet rs;
         Pracownik p = null;
         try {
             stmt = conn.prepareStatement(q);stmt.setInt(1, id);
@@ -212,11 +262,45 @@ public class DbHandler {
         return p;
     }
 
+    public HashMap<Integer, String> getKlienciIdMap(){
+        String q = "SELECT * FROM klient";
+        Statement statement;
+        ResultSet rs;
+        HashMap<Integer, String> hashMap = new HashMap<>();
+        try{
+            statement = conn.createStatement();
+            rs = statement.executeQuery(q);
+            while (rs.next()){
+                hashMap.put(rs.getInt("id"), (rs.getString("Imie")+" "+rs.getString("Nazwisko")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hashMap;
+    }
+
+    public HashMap<Integer, String> getPracownicyIdMap(){
+        String q = "SELECT id, Imie, Nazwisko FROM pracownik";
+        Statement statement;
+        ResultSet rs;
+        HashMap<Integer, String> hashMap = new HashMap<>();
+        try{
+            statement = conn.createStatement();
+            rs = statement.executeQuery(q);
+            while (rs.next()){
+                hashMap.put(rs.getInt("id"), (rs.getString("Imie")+" "+rs.getString("Nazwisko")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hashMap;
+    }
+
     public int getPracownikIdByZlecenieId(int id){
         String q = "SELECT pracownik_id FROM zlec_prac WHERE Zlecenie_id = ?";
         System.out.println("Zlecenie id: "+ id);
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
+        ResultSet rs;
         int Pid = 0;
         try {
             stmt = conn.prepareStatement(q);
@@ -234,8 +318,8 @@ public class DbHandler {
 
     public boolean usunZlecenie(int id){
         String q = "DELETE FROM `zlecenie` WHERE `id` = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
+        ResultSet rs;
         try {
             stmt = conn.prepareStatement(q);
             stmt.setInt(1, id);
@@ -250,8 +334,7 @@ public class DbHandler {
 
     public boolean zakonczZlecenie(int kosztKoncowy, int id){
         String q = "UPDATE `zlecenie` SET Status = 2, data_zak = now(), Koszt_koncowy = ? WHERE `id` = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement(q);
             stmt.setInt(1, kosztKoncowy);
@@ -266,7 +349,7 @@ public class DbHandler {
 
     public void modyfikujOpis(String opis, int id){
         String q = "UPDATE `zlecenie` SET `Opis` = ? WHERE `id` = ?";
-        PreparedStatement stmt = null;
+        PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement(q);
             stmt.setString(1, opis);
@@ -277,4 +360,21 @@ public class DbHandler {
             e.printStackTrace();
         }
     }
+
+    public int getOstatnieIdKlienta(){
+        String q = "SELECT id FROM `klient` ORDER BY id DESC LIMIT 1";
+        Statement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(q);
+            rs.first();
+            return rs.getInt("id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
 }

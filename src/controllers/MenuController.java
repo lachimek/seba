@@ -32,6 +32,7 @@ public class MenuController implements Initializable {
     }
 
     public void dodajZlecenie() {
+        Main.setView(Views.NOWE_ZLECENIE);
     }
 
     public void wyloguj() {

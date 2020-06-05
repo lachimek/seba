@@ -7,6 +7,7 @@ public class App {
     public byte archiwum;
     public int wybraneZlecenieId;
     public int wybraneZlecenieKlientId;
+    public Adres nowyAdres;
 
     public static App getInstance(){
         return instance;
@@ -14,4 +15,11 @@ public class App {
 
     private DbHandler dbHandler = new DbHandler();
     public DbHandler getDbHandler(){ return dbHandler; }
+
+    private Klient klient = new Klient();
+    public Klient getKlient() {
+        return klient;
+    }
+    public void setKlient(Klient k){ klient = k; }
+
 }

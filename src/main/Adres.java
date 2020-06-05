@@ -17,6 +17,6 @@ public class Adres {
 
     @Override
     public String toString() {
-        return miasto + " " + kodPocztowy + " " + ulica + " " + nrBudynku + "/" + nrLokalu + '\n';
+        return miasto + " " + kodPocztowy + " " + ulica + " " + nrBudynku + "/" + nrLokalu;
     }
 }

@@ -1,25 +1,18 @@
 package controllers;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import main.App;
 import main.DbHandler;
 import main.Main;
 import main.Zlecenie;
 import views.Views;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
