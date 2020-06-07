@@ -43,5 +43,6 @@
          <Font name="System Bold" size="16.0" />
       </font>
    </Label>
-   <Button layoutX="231.0" layoutY="354.0" mnemonicParsing="false" onAction="#dodajZlecenie" fx:id="btn" prefHeight="41.0" prefWidth="120.0" text="Dodaj zlecenie" />
+   <Button fx:id="btn" layoutX="231.0" layoutY="354.0" mnemonicParsing="false" onAction="#dodajZlecenie" prefHeight="41.0" prefWidth="120.0" text="Dodaj zlecenie" />
+   <Button layoutX="466.0" layoutY="354.0" mnemonicParsing="false" onAction="#powrotDoMenu" prefHeight="41.0" prefWidth="120.0" text="Powrót do menu" />
 </AnchorPane>

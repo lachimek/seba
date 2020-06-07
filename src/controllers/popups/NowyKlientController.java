@@ -75,9 +75,7 @@ public class NowyKlientController {
 
     private void fillTextArea(TextArea area, List<?> data){
         area.setText("");
-        data.forEach(item ->{
-            area.appendText(item.toString() +'\n');
-        });
+        data.forEach(item -> area.appendText(item.toString() +'\n'));
     }
 
     private String otworzAlert(int optype){
@@ -94,6 +92,4 @@ public class NowyKlientController {
         }
         return null;
     }
-    //tworzenie nowego obiektu klienta i zwrocenie go do app.nowyklient
-    //id z db.getOstatnieIdKlienta()
 }

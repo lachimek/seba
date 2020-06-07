@@ -29,7 +29,7 @@ public class DbHandler {
 
     //metoda logowania zwraca true/false
     public boolean loginUser(String login, String pass){
-        String q = "SELECT * FROM pracownik WHERE BINARY login = ? AND haslo = SHA1(?)";
+        String q = "SELECT * FROM pracownik WHERE BINARY login = ? AND haslo = SHA1(?) AND pracuje = 1";
         PreparedStatement statement;
         try{
             statement = conn.prepareStatement(q);
@@ -49,7 +49,7 @@ public class DbHandler {
 
     //metoda od rejestracji zwraca true/false
     public boolean registerUser(String login, String pass, String imie, String nazwisko, String telefon, String email){
-        String q = "INSERT INTO `pracownik`(`id`, `Imie`, `Nazwisko`, `nr_tel`, `email`, `login`, `haslo`, `serwis_id`) VALUES (DEFAULT,?,?,?,?,?,SHA(?),1)";
+        String q = "INSERT INTO `pracownik`(`id`, `Imie`, `Nazwisko`, `nr_tel`, `email`, `login`, `haslo`, `serwis_id`, `pracuje`) VALUES (DEFAULT,?,?,?,?,?,SHA(?),1, 1)";
         PreparedStatement statement;
         try{
             statement = conn.prepareStatement(q);
@@ -282,7 +282,7 @@ public class DbHandler {
     }
 
     public Pracownik getPracownikById(int id){
-        String q = "SELECT * FROM pracownik WHERE id = ?";
+        String q = "SELECT * FROM pracownik WHERE id = ? AND pracuje = 1";
         PreparedStatement stmt;
         ResultSet rs;
         Pracownik p = null;
@@ -320,7 +320,7 @@ public class DbHandler {
     }
 
     public HashMap<Integer, String> getPracownicyIdMap(){
-        String q = "SELECT id, Imie, Nazwisko FROM pracownik";
+        String q = "SELECT id, Imie, Nazwisko FROM pracownik WHERE pracuje = 1";
         Statement statement;
         ResultSet rs;
         HashMap<Integer, String> hashMap = new HashMap<>();
@@ -401,7 +401,7 @@ public class DbHandler {
         }
     }
 
-    public int getOstatnieIdKlienta(){
+    public int getOstatnieIdKlienta() {
         String q = "SELECT id FROM `klient` ORDER BY id DESC LIMIT 1";
         Statement stmt;
         ResultSet rs;
@@ -416,5 +416,107 @@ public class DbHandler {
         }
     }
 
+    public boolean usunPracownika(int id){
+        String q = "UPDATE pracownik SET pracuje = 0 WHERE id = ?";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setInt(1, id);
+            stmt.execute();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    public boolean zmienHaslo(int id, String pass){
+        String q = "UPDATE pracownik SET haslo = SHA1(?) WHERE id = ?";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setString(1, salt+pass);
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean modyfikujPracownika(Pracownik p){
+        String q = "UPDATE `pracownik` SET `Imie`=?,`Nazwisko`=?,`nr_tel`=?,`email`=? WHERE id = ?";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setString(1, p.getImie());
+            stmt.setString(2, p.getNazwisko());
+            stmt.setString(3, p.getNrTel());
+            stmt.setString(4, p.getEmail());
+            stmt.setInt(5, p.getId());
+            stmt.execute();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Serwis getSerwisInfo(){
+        String qSerwis = "SELECT nazwa, adres FROM serwis WHERE id = 1";
+        String qEmail = "SELECT email FROM email_serwis WHERE serwis_id = 1";
+        String qTel = "SELECT numer_tel FROM numer_tel_serwis WHERE serwis_id = 1";
+        Serwis s = new Serwis();
+        Statement statement;
+        ResultSet rs;
+        try {
+            statement = conn.createStatement();
+            rs = statement.executeQuery(qSerwis);
+            rs.first();
+            s.setNazwa(rs.getString("nazwa"));
+            s.setAdres(rs.getString("adres"));
+            rs.close();
+            rs = statement.executeQuery(qEmail);
+            rs.first();
+            s.setEmail(rs.getString("email"));
+            rs.close();
+            rs = statement.executeQuery(qTel);
+            rs.first();
+            s.setTelefon(rs.getString("numer_tel"));
+            rs.close();
+            statement.close();
+            return s;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return s;
+        }
+    }
+
+    public void updateSerwis(String data, int optype){//0 = adres // 1 = tel // 2 = email
+        String q = "";
+        switch (optype){
+            case 0:
+                q = "UPDATE serwis SET adres = ? WHERE id = 1";
+                break;
+            case 1:
+                q = "UPDATE numer_tel_serwis SET numer_tel = ? WHERE serwis_id = 1";
+                break;
+            case 2:
+                q = "UPDATE email_serwis SET email = ? WHERE serwis_id = 1";
+                break;
+        }
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(q);
+            stmt.setString(1, data);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

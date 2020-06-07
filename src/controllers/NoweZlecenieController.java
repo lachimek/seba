@@ -1,10 +1,12 @@
 package controllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import main.*;
+import main.App;
+import main.DbHandler;
+import main.Main;
+import main.Zlecenie;
 import views.Views;
 
 import java.net.URL;
@@ -70,6 +72,10 @@ public class NoweZlecenieController implements Initializable {
             klienci.add(hmapKlienci.get(key));
         }
         klienciCombo.setItems(FXCollections.observableArrayList(klienci));
+    }
+
+    public void powrotDoMenu(){
+        Main.setView(Views.MENU);
     }
 
     private <K, V> K getKey(Map<K, V> map, V value) {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="443.0" style="-fx-background-color: #009dff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.popups.PracownikController">
+   <children>
+      <Label layoutX="63.0" layoutY="104.0" text="Imie" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="imie" layoutX="241.0" layoutY="104.0" />
+      <Label layoutX="63.0" layoutY="138.0" text="Nazwisko" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nazwisko" layoutX="241.0" layoutY="138.0" />
+      <Label layoutX="63.0" layoutY="172.0" text="Telefon" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tel" layoutX="241.0" layoutY="172.0" />
+      <Label layoutX="63.0" layoutY="204.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="241.0" layoutY="204.0" />
+      <Button fx:id="btn" layoutX="178.0" layoutY="310.0" mnemonicParsing="false" onAction="#zapiszZmiany" prefHeight="42.0" prefWidth="121.0" text="Zapisz zmiany" />
+      <Label layoutX="61.0" layoutY="37.0" text="Modyfikacja pracownika" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Button layoutX="178.0" layoutY="256.0" mnemonicParsing="false" onAction="#zmienLiH" prefHeight="42.0" prefWidth="121.0" text="Zmień login i hasło" />
+   </children>
+</AnchorPane>

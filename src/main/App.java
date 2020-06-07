@@ -7,6 +7,8 @@ public class App {
     public byte archiwum;
     public int wybraneZlecenieId;
     public int wybraneZlecenieKlientId;
+
+    public Pracownik wybranyPracownik;
     public Adres nowyAdres;
 
     public static App getInstance(){
