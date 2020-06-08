@@ -1,7 +1,6 @@
 package controllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import main.App;
@@ -12,6 +11,7 @@ import views.Views;
 
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ZarzadzanieController implements Initializable {
 
@@ -111,13 +111,14 @@ public class ZarzadzanieController implements Initializable {
         email.setText(s.getEmail());
     }
 
-    private <K, V> K getKey(Map<K, V> map, V value) {
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
+    private int getKey(Map<Integer, String> map, String data){
+        AtomicInteger klucz = new AtomicInteger();
+        map.forEach((key, value) -> {
+            if (value.equals(data)) {
+                klucz.set(key);
             }
-        }
-        return null;
+        });
+        return klucz.get();
     }
 
     private String otworzAlert(int optype, String base){

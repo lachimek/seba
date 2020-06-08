@@ -21,6 +21,16 @@
       </AnchorPane>
     <AnchorPane layoutX="302.0" minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="341.0" style="-fx-background-color: #ffffff;">
          <children>
+             <TextField layoutX="67.0" layoutY="145.0" prefHeight="31.0" prefWidth="228.0" fx:id="login" promptText="Login" style="-fx-background-color: #ffffff; -fx-border-color: #009dff; -fx-border-width: 0px 0px 2px 0px;">
+                 <font>
+                     <Font size="14.0" />
+                 </font>
+             </TextField>
+             <PasswordField layoutX="67.0" layoutY="177.0" prefHeight="44.0" prefWidth="228.0" fx:id="pass" promptText="Hasło" style="-fx-background-color: #ffffff; -fx-border-color: #009dff; -fx-border-width: 0px 0px 2px 0px;">
+                 <font>
+                     <Font size="14.0" />
+                 </font>
+             </PasswordField>
             <ButtonBar layoutX="40.0" layoutY="331.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="74.0" prefWidth="262.0">
                <buttons>
                   <Button mnemonicParsing="false" onAction="#register" prefHeight="27.0" style="-fx-background-color: #ffffff;" text="Rejestracja" textFill="#009dff">
@@ -35,16 +45,6 @@
                   </Button>
                </buttons>
             </ButtonBar>
-            <PasswordField layoutX="67.0" layoutY="177.0" prefHeight="44.0" prefWidth="228.0" fx:id="pass" promptText="Hasło" style="-fx-background-color: #ffffff; -fx-border-color: #009dff; -fx-border-width: 0px 0px 2px 0px;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </PasswordField>
-            <TextField layoutX="67.0" layoutY="145.0" prefHeight="31.0" prefWidth="228.0" fx:id="login" promptText="Login" style="-fx-background-color: #ffffff; -fx-border-color: #009dff; -fx-border-width: 0px 0px 2px 0px;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
          </children>
       </AnchorPane>
    </children>

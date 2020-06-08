@@ -50,18 +50,18 @@ public class Klient {
         return adresy;
     }
 
-    public void debug(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(id).append('\n');
-        sb.append("Imie: ").append(imie).append(" Nazwisko: ").append(nazwisko);
-        sb.append("\nTelefony: ");
-        telefony.forEach(telefon -> sb.append(telefon).append(" "));
-        sb.append("\nEmaile: ");
-        emaile.forEach(email -> sb.append(email).append(" "));
-        sb.append("\nAdresy zamieszkania");
-        adresy.forEach(adres -> sb.append(adres.toString()).append('\n'));
-        sb.append('\n');
-
-        System.out.println(sb.toString());
-    }
+//    public void debug(){
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("ID: ").append(id).append('\n');
+//        sb.append("Imie: ").append(imie).append(" Nazwisko: ").append(nazwisko);
+//        sb.append("\nTelefony: ");
+//        telefony.forEach(telefon -> sb.append(telefon).append(" "));
+//        sb.append("\nEmaile: ");
+//        emaile.forEach(email -> sb.append(email).append(" "));
+//        sb.append("\nAdresy zamieszkania");
+//        adresy.forEach(adres -> sb.append(adres.toString()).append('\n'));
+//        sb.append('\n');
+//
+//        System.out.println(sb.toString());
+//    }
 }

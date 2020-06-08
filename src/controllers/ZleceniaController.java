@@ -137,7 +137,7 @@ public class ZleceniaController implements Initializable {
             alertConf.setHeaderText(null);
             alertConf.setContentText(contentOptions[optype]);
             Optional<ButtonType> result = alertConf.showAndWait();
-            return result.get() == ButtonType.OK; //klikniecie tak = true
+            return(result.isPresent() && result.get() == ButtonType.OK); //klikniecie tak = true
         }catch (NullPointerException e){ //zlecenieId wyrzuci null pointera bo selected item bedzie null
             Alert alertErr = new Alert(Alert.AlertType.ERROR);
             alertErr.setTitle("Błąd");

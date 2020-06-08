@@ -11,6 +11,7 @@ import views.Views;
 
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NoweZlecenieController implements Initializable {
     public ComboBox<String> klienciCombo;
@@ -78,15 +79,13 @@ public class NoweZlecenieController implements Initializable {
         Main.setView(Views.MENU);
     }
 
-    private <K, V> K getKey(Map<K, V> map, V value) {
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
+    private int getKey(Map<Integer, String> map, String data){
+        AtomicInteger klucz = new AtomicInteger();
+        map.forEach((key, value) -> {
+            if (value.equals(data)) {
+                klucz.set(key);
             }
-        }
-        return null;
+        });
+        return klucz.get();
     }
-    //nowe zlecenie klient brany z globala
-    //wypelnienie comboboxa klientami (imie nazwisko)
-    //wypelnienie comboboxa pracownikami (imie nazwisko)
 }

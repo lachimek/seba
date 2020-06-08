@@ -26,7 +26,7 @@ public class Main extends Application {
 
     //metoda ustawiajaca widok na scenie na podany w formie stringa nazwy widoku
     public static void setView(String fxml){
-        Scene s = null;
+        Scene s;
         try {
             s = new Scene(FXMLLoader.load(Objects.requireNonNull(Main.class.getClassLoader().getResource(fxml))));
             stage.setScene(s);

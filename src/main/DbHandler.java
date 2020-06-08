@@ -459,6 +459,7 @@ public class DbHandler {
             stmt.setInt(5, p.getId());
             stmt.execute();
             stmt.close();
+            App.getInstance().loggedInUser = p.getImie();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

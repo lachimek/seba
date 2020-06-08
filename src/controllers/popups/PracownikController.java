@@ -1,13 +1,11 @@
 package controllers.popups;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import main.App;
 import main.DbHandler;
 import main.Pracownik;

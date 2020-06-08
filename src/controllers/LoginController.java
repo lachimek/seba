@@ -10,7 +10,6 @@ import main.App;
 import main.Main;
 import views.Views;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,11 +20,11 @@ public class LoginController implements Initializable {
     public AnchorPane root;
 
     //metoda przycisku ktory zmienia okno na okno rejestracji
-    public void register() throws IOException {
+    public void register() {
         Main.setView(Views.REJESTRACJA);
     }
     //metoda przycisku ktory zmienia okno na okno logowania
-    public void login() throws IOException {
+    public void login() {
         if(App.getInstance().getDbHandler().loginUser(login.getText(), pass.getText())){
             Main.setView(Views.MENU);
         }else{
