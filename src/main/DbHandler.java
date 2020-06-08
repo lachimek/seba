@@ -282,7 +282,7 @@ public class DbHandler {
     }
 
     public Pracownik getPracownikById(int id){
-        String q = "SELECT * FROM pracownik WHERE id = ? AND pracuje = 1";
+        String q = "SELECT * FROM pracownik WHERE id = ?";
         PreparedStatement stmt;
         ResultSet rs;
         Pracownik p = null;
